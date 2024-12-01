@@ -2,20 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Slide Left Animation */
+@keyframes slideLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-}
+  
+  .animate-slide-left {
+    animation: slideLeft 1.5s ease-out forwards;
+  }
+  
+  /* Slide Up Animation */
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 1.5s ease-out forwards;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  /* In your global CSS file (e.g., globals.css) */
+
+@keyframes slideInLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply these animations to the respective elements */
+  .animate-slide-in-left {
+    animation: slideInLeft 1s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 1s ease-out;
+  }
+  
+  .animate-slide-in-bottom {
+    animation: slideInBottom 1s ease-out;
+  }
+  
+  
+  
