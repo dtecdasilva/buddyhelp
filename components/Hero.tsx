@@ -25,8 +25,8 @@ function Hero() {
     gender: "",
   });
   const [showForm, setShowForm] = useState(false); // Whether to show the age/gender/country form
-  const [loading, setLoading] = useState(false); // Define loading state for managing loading state
-  const [senderId, setSenderId] = useState(() => {
+  const [,setLoading] = useState(false); // Define loading state for managing loading state
+  const [senderId, ] = useState(() => {
     let userId = Cookies.get("anonymousUserId");
     if (!userId) {
       userId = uuidv4();
