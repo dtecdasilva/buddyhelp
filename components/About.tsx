@@ -30,7 +30,7 @@ function About() {
         {/* Animated About Section */}
         <div className="w-full md:w-1/2 animate-slide-in-right">
           <p className="text-gray-700"></p>
-          At Buddy Help, we understand the importance of mental health and the power of human connection. Our mission is to make emotional support accessible to everyone, anytime, and anywhere. Whether you're looking for someone to talk to or just need a quick chat to feel heard, Buddy Help is here to be your supportive companion.
+          At Buddy Help, we understand the importance of mental health and the power of human connection. Our mission is to make emotional support accessible to everyone, anytime, and anywhere. Whether you are looking for someone to talk to or just need a quick chat to feel heard, Buddy Help is here to be your supportive companion.
           Join our community today, and let us work together towards better mental well-being!
             <div className="space-y-4 p-6 rounded-lg max-w-md">
               {services.map((service, index) => (
