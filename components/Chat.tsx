@@ -11,24 +11,22 @@ import {
   onSnapshot,
   addDoc,
   orderBy,
+  Timestamp,
 } from "firebase/firestore";
 
-// Define the Message type
+// Message type definition
 interface Message {
   id?: string;
-  text: string;
+  message: string;
   senderId: string;
   volunteerId?: string;
-  timestamp?: {
-    seconds: number;
-    nanoseconds: number;
-  };
+  timestamp?: Timestamp;
 }
 
 interface ChatModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  volunteerId?: string; // Now optional
+  volunteerId?: string;
 }
 
 const Chat: React.FC<ChatModalProps> = ({ open, onOpenChange, volunteerId }) => {
@@ -41,22 +39,29 @@ const Chat: React.FC<ChatModalProps> = ({ open, onOpenChange, volunteerId }) => 
     return userId;
   });
 
-  const [messages, setMessages] = useState<Message[]>([]); // Use Message type here
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = async () => {
     if (input.trim()) {
-      const newMessage: Message = { text: input, senderId: token };
-      setMessages((prev) => [...prev, newMessage]);
+      const tempMessage: Message = {
+        message: input,
+        senderId: token,
+        volunteerId,
+        timestamp: Timestamp.now(),
+      };
+
+      // Temporary display before confirming with Firestore
+      setMessages((prev) => [...prev, tempMessage]);
       setInput("");
 
       try {
         await addDoc(collection(db, "chat"), {
-          message: newMessage.text,
+          message: input,
           senderId: token,
-          volunteerId: volunteerId,
-          timestamp: new Date(),
+          volunteerId,
+          timestamp: Timestamp.now(),
         });
       } catch (error) {
         console.error("Error sending message to Firestore:", error);
@@ -83,8 +88,8 @@ const Chat: React.FC<ChatModalProps> = ({ open, onOpenChange, volunteerId }) => 
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const allMessages = snapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
-        } as Message));
+          ...(doc.data() as Message),
+        }));
         setMessages(allMessages);
       });
 
@@ -114,22 +119,30 @@ const Chat: React.FC<ChatModalProps> = ({ open, onOpenChange, volunteerId }) => 
           </div>
           <div className="flex flex-col h-[500px]">
             <div className="flex-grow overflow-y-auto p-4 bg-gray-100 rounded">
-              {messages.map((message, index) => (
+              {messages.map((messageObj, index) => (
                 <div
-                  key={message.id || index}
-                  className={`mb-4 flex ${message.senderId === token ? "justify-end" : "justify-start"}`}
+                  key={messageObj.id || index}
+                  className={`mb-4 flex ${
+                    messageObj.senderId === token ? "justify-end" : "justify-start"
+                  }`}
                 >
                   <div
                     className={`${
-                      message.senderId === token
+                      messageObj.senderId === token
                         ? "bg-blue-500 text-white"
                         : "bg-gray-300 text-black"
                     } p-3 rounded max-w-xs`}
                   >
-                    {message.text}
-                    <p className={`text-xs mt-1 ${message.senderId === token ? "text-white" : "text-gray-500"}`}>
-                      {message.timestamp
-                        ? new Date(message.timestamp.seconds * 1000).toLocaleString()
+                    <p>{messageObj.message}</p>
+                    <p
+                      className={`text-xs mt-1 ${
+                        messageObj.senderId === token
+                          ? "text-white"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {messageObj.timestamp
+                        ? messageObj.timestamp.toDate().toLocaleString()
                         : "Sending..."}
                     </p>
                   </div>

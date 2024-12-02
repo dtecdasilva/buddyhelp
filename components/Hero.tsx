@@ -13,6 +13,7 @@ import {
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid"; // Ensure you import uuidv4
 import { FiMessageSquare, FiUserCheck } from "react-icons/fi";
+import Image from "next/image";
 
 // Define a type for the conditions used in findMatch
 type Condition = { field: string; value: string | number };
@@ -169,15 +170,8 @@ function Hero() {
 
   return (
     <section className="relative flex items-center justify-between px-20 py-20 mt-8 mx-10 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
-      {/* Background Video */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
-        src="/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+    {/* Background Video */}
+    <video className="absolute top-0 left-0 w-full h-full object-cover opacity-20" src="/hero.mp4" autoPlay loop muted playsInline />
 
       {/* Content */}
       <div className="relative z-10 max-w-lg space-y-6">
@@ -248,6 +242,15 @@ function Hero() {
           <Chat volunteerId={matchedUserId || "defaultId"} open={isOpen} onOpenChange={setIsOpen} />
         )}
       </Dialog.Root>
+      <div className="relative z-10 w-[350px] mt-8 -ml-10 lg:mt-16 lg:-ml-5">
+        <Image
+          src="/Untitled-2.png"
+          alt="Hero image"
+          width={400}
+          height={500}
+          className="rounded-lg shadow-2xl transform transition-transform hover:scale-105"
+        />
+      </div>
     </section>
   );
 }

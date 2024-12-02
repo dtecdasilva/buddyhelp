@@ -35,27 +35,27 @@ interface SidebarProps {
 
             // Real-time listener
             const unsubscribe = onSnapshot(
-                q,
-                (snapshot) => {
-                    const fetchedChats = snapshot.docs.map((doc) => {
-                        const data = doc.data();
-                        return {
-                            id: doc.id,
-                            senderId: data.senderId, // Make sure to extract senderId
-                            message: data.message,   // Make sure to extract message
-                            timestamp: data.timestamp, // Make sure to extract timestamp
-                        } as ChatData; // Explicitly cast to ChatData
-                    });
-                    const latestChats = getLatestMessages(fetchedChats);
-                    setChats(latestChats);
-                    setLoading(false);
-                },
-                (error) => {
-                    console.error("Error fetching chats:", error);
-                    setLoading(false);
-                }
-            );
-            
+    q,
+    (snapshot) => {
+        const fetchedChats = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            return {
+                id: doc.id,
+                senderId: data.senderId, // Make sure to extract senderId
+                message: data.message,   // Make sure to extract message
+                timestamp: data.timestamp, // Make sure to extract timestamp
+            } as ChatData; // Explicitly cast to ChatData
+        });
+        const latestChats = getLatestMessages(fetchedChats);
+        setChats(latestChats);
+        setLoading(false);
+    },
+    (error) => {
+        console.error("Error fetching chats:", error);
+        setLoading(false);
+    }
+);
+
 
             return () => unsubscribe(); // Cleanup on unmount
         } else {
@@ -122,10 +122,13 @@ interface SidebarProps {
 
             {selectedChat && (
                 <ChatModal
-                    open={!!selectedChat}
-                    onClose={() => setSelectedChat(null)}
+                    open={Boolean(selectedChat)}
+                    onOpenChange={(open) => {
+                        if (!open) setSelectedChat(null);  // Close the modal by setting selectedChat to null
+                    }}
                     volunteerId={volunteerId}
-                    senderId={selectedChat?.senderId}
+                    senderId={selectedChat.senderId}
+                    userId={volunteerId} 
             />
             )}
         </>
