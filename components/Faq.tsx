@@ -12,9 +12,9 @@ function Faq() {
     { id: 6, question: "Can I remain anonymous?", answer: "Yes, you can remain anonymous during your chat sessions." },
   ];
 
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null); // Specify type here
 
-  const toggleFaq = (id) => {
+  const toggleFaq = (id: number) => {
     setOpenFaq(openFaq === id ? null : id);
   };
 

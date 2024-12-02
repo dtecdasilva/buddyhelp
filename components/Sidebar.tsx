@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot, Timestamp } from "firebase/firestore";
 import ChatModal from "./Chat2"; // Import ChatModal
 
-function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
-    const [chats, setChats] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedChat, setSelectedChat] = useState(null);
+interface SidebarProps {
+    isOpen: boolean;
+    toggleSidebar: () => void;
+    volunteerId: string;
+  }
+  
+  interface ChatData {
+    id: string;
+    senderId: string;
+    message: string;
+    timestamp: Timestamp;
+  }
+  
+  interface LatestChat {
+    userId: string;
+    latestMessage: ChatData;
+    messageCount: number;
+  }
+  
+  const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar, volunteerId }) => {
+    const [chats, setChats] = useState<LatestChat[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [selectedChat, setSelectedChat] = useState<{ senderId: string } | null>(null);
 
     useEffect(() => {
         if (volunteerId) {
@@ -18,10 +37,15 @@ function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
             const unsubscribe = onSnapshot(
                 q,
                 (snapshot) => {
-                    const fetchedChats = snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }));
+                    const fetchedChats = snapshot.docs.map((doc) => {
+                        const data = doc.data();
+                        return {
+                            id: doc.id,
+                            senderId: data.senderId, // Make sure to extract senderId
+                            message: data.message,   // Make sure to extract message
+                            timestamp: data.timestamp, // Make sure to extract timestamp
+                        } as ChatData; // Explicitly cast to ChatData
+                    });
                     const latestChats = getLatestMessages(fetchedChats);
                     setChats(latestChats);
                     setLoading(false);
@@ -31,6 +55,7 @@ function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
                     setLoading(false);
                 }
             );
+            
 
             return () => unsubscribe(); // Cleanup on unmount
         } else {
@@ -39,16 +64,16 @@ function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
         }
     }, [volunteerId]);
 
-    const getLatestMessages = (chats) => {
-        const groups = {};
-
+    const getLatestMessages = (chats: ChatData[]): LatestChat[] => {
+        const groups: { [key: string]: ChatData[] } = {};
+    
         chats.forEach((chat) => {
             if (!groups[chat.senderId]) {
                 groups[chat.senderId] = [];
             }
             groups[chat.senderId].push(chat);
         });
-
+    
         return Object.keys(groups).map((userId) => {
             const userChats = groups[userId];
             userChats.sort(
@@ -61,6 +86,7 @@ function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
             };
         });
     };
+    
 
     return isOpen ? (
         <>
@@ -100,7 +126,6 @@ function Sidebar({ isOpen, toggleSidebar, volunteerId }) {
                     onClose={() => setSelectedChat(null)}
                     volunteerId={volunteerId}
                     senderId={selectedChat?.senderId}
-                    userId={volunteerId} // Assuming the current user is the volunteer
             />
             )}
         </>

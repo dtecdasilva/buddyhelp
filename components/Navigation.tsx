@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 function Navigation() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [matchedUser, setMatchedUser] = useState(null);
+    const [matchedUser, setMatchedUser] = useState<string | null>(null);
     const [isModalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         age: "",
@@ -51,8 +51,9 @@ function Navigation() {
                         setModalOpen(true);
                     }
                 } catch (error) {
-                    console.error("Error fetching user data:", error.message);
-                } finally {
+                    console.error("Error fetching user data:", error);
+                }
+                finally {
                     setLoading(false);
                 }
             }
@@ -60,12 +61,17 @@ function Navigation() {
         fetchUserData();
     }, [user]);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!user) {
+            console.error("User is not authenticated.");
+            return;
+        }
+        
         try {
             const userData = {
                 email: user.primaryEmailAddress?.emailAddress || user?.emailAddresses[0]?.emailAddress,
@@ -78,9 +84,10 @@ function Navigation() {
             console.log("User data saved!");
             setModalOpen(false); // Close modal on successful form submission
         } catch (error) {
-            console.error("Error saving user data:", error.message);
+            console.error("Error saving user data:", error);
         }
     };
+    
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
