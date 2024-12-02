@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Check } from "lucide-react";
 
 function About() {

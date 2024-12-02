@@ -13,7 +13,7 @@ import {
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid"; // Ensure you import uuidv4
 import { FiMessageSquare, FiUserCheck } from "react-icons/fi";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 // Define a type for the conditions used in findMatch
 type Condition = { field: string; value: string | number };
