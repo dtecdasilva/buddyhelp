@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -12,7 +12,7 @@ function Footer() {
 
         {/* Navigation Links */}
         <nav>
-          <ul className="flex space-x-8">
+          <ul className="flex space-x-8 md:flex hidden">
             <li><a href="#" className="text-gray-400 hover:text-yellow-400">Home</a></li>
             <li><a href="#" className="text-gray-400 hover:text-yellow-400">About Us</a></li>
             <li><a href="#" className="text-gray-400 hover:text-yellow-400">How It Works</a></li>
@@ -28,7 +28,7 @@ function Footer() {
             <FaFacebookF className="w-5 h-5" />
           </a>
           <a href="#" className="text-gray-400 hover:text-white">
-            <FaTwitter className="w-5 h-5" />
+            <FaWhatsapp className="w-5 h-5" />
           </a>
         </div>
       </div>

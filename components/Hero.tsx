@@ -169,31 +169,33 @@ function Hero() {
   };
 
   return (
-    <section className="relative flex items-center justify-between px-20 py-20 mt-8 mx-10 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
+    <section className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20 mt-16 sm:mt-32 md:mt-8 mx-4 md:mx-8 lg:mx-10 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
     {/* Background Video */}
     <video className="absolute top-0 left-0 w-full h-full object-cover opacity-20" src="/hero.mp4" autoPlay loop muted playsInline />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-lg space-y-6">
-        <h1 className="text-6xl font-extrabold mb-4 tracking-tight leading-tight">
-          The BuddyHelp Platform
-        </h1>
-        <p className="text-lg opacity-90">
-          Offering emotional support and mental well-being through accessible and anonymous chats.
-        </p>
-
-        <div className="flex space-x-4 mt-10">
-          <Button
-            onClick={handleChatClick}
-            className="flex items-center bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 hover:shadow-lg px-6 py-4 rounded-lg text-white transition-transform transform hover:scale-105"
-          >
-            <FiMessageSquare className="mr-2" size={24} /> Chat with a Volunteer Listener
-          </Button>
-          <Button className="flex items-center border border-white text-white px-6 py-4 rounded-lg hover:bg-white hover:text-black transition-transform transform hover:scale-105">
-            <FiUserCheck className="mr-2" size={24} /> Get Matched with a Counselor
-          </Button>
-        </div>
+  
+    {/* Content */}
+    <div className="relative z-10 max-w-full md:max-w-lg space-y-4 md:space-y-6 text-center md:text-left">
+      <h1 className="text-4xl sm:text-5xl sm:pt-10 lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
+        The BuddyHelp Platform
+      </h1>
+      <p className="text-base sm:text-lg opacity-90">
+        Offering emotional support and mental well-being through accessible and anonymous chats.
+      </p>
+  
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mt-6 md:mt-10 justify-center md:justify-start">
+        <Button
+          onClick={handleChatClick}
+          className="flex items-center bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 hover:shadow-lg px-6 py-3 sm:py-4 rounded-lg text-white transition-transform transform hover:scale-105 text-sm sm:text-base"
+        >
+          <FiMessageSquare className="mr-2" size={20} /> Chat with a Volunteer Listener
+        </Button>
+        <Button className="flex items-center border border-white text-white px-6 py-3 sm:py-4 rounded-lg hover:bg-white hover:text-black transition-transform transform hover:scale-105 text-sm sm:text-base">
+          <FiUserCheck className="mr-2" size={20} /> Get Matched with a Counselor
+        </Button>
       </div>
+    </div>
+  
+  
 
       {/* Dialog for Form or Chat */}
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -242,13 +244,13 @@ function Hero() {
           <Chat volunteerId={matchedUserId || "defaultId"} open={isOpen} onOpenChange={setIsOpen} />
         )}
       </Dialog.Root>
-      <div className="relative z-10 w-[350px] mt-8 -ml-10 lg:mt-16 lg:-ml-5">
+      <div className="relative z-10 w-3/4 md:w-1/2 lg:w-[350px] mt-8 md:mt-0 lg:mt-16 -ml-5 md:ml-0 lg:-ml-5 hidden sm:flex justify-center">
         <Image
           src="/Untitled-2.png"
           alt="Hero image"
           width={400}
           height={500}
-          className="rounded-lg shadow-2xl transform transition-transform hover:scale-105"
+          className="rounded-lg shadow-2xl transform transition-transform hover:scale-105 max-w-full h-auto"
         />
       </div>
     </section>

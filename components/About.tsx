@@ -22,8 +22,8 @@ function About() {
             src="/human.jpg"
             alt="Hero image"
             layout="responsive"
-            width={400} // Set width based on the aspect ratio of your image
-            height={600} // Adjust height to maintain aspect ratio
+            width={300} // Set width based on the aspect ratio of your image
+            height={200} // Adjust height to maintain aspect ratio
             className="rounded"
           />
         </div>
