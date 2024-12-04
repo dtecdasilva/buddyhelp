@@ -12,7 +12,7 @@ function About() {
   ];
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-8 max-w-7xl mx-auto space-y-8" id="about">
       {/* Main section with image and text */}
       <h2 className="text-3xl font-bold mb-12 text-center">ABOUT BUDDY HELP</h2>
       <div className="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">

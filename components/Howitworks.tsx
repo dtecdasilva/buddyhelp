@@ -9,7 +9,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="flex flex-col items-center justify-center py-12 bg-gray-100">
+    <section className="flex flex-col items-center justify-center py-12 bg-gray-100" id='howitworks'>
       <h2 className="text-3xl font-bold mb-8">HOW IT WORKS</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
         {steps.map((step) => (

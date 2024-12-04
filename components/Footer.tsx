@@ -13,9 +13,9 @@ function Footer() {
         {/* Navigation Links */}
         <nav>
           <ul className="flex space-x-8 md:flex hidden">
-            <li><a href="#" className="text-gray-400 hover:text-yellow-400">Home</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-yellow-400">About Us</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-yellow-400">How It Works</a></li>
+            <li><a href="#home" className="text-gray-400 hover:text-yellow-400">Home</a></li>
+            <li><a href="#about" className="text-gray-400 hover:text-yellow-400">About Us</a></li>
+            <li><a href="#howitworks" className="text-gray-400 hover:text-yellow-400">How It Works</a></li>
           </ul>
         </nav>
 

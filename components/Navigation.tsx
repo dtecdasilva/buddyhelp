@@ -103,13 +103,13 @@ function Navigation() {
   
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
+            <a href="#home" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
               Home
             </a>
-            <a href="#" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
+            <a href="#about" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
               About Us
             </a>
-            <a href="#" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
+            <a href="#howitworks" className={`py-2 px-4 transition-colors duration-300 ${isScrolled ? 'text-gray-300 hover:text-yellow-400' : 'text-gray-700 hover:text-yellow-600'}`}>
               How It Works
             </a>
   
@@ -202,17 +202,17 @@ function Navigation() {
               <FiMenu size={24} />
             </button>
             {isMobileMenuOpen && (
-              <div className="absolute top-12 right-0 w-48 bg-white shadow-lg rounded-lg z-50">
-                <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Home</a>
-                <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">About Us</a>
-                <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">How It Works</a>
+              <div className="absolute top-12 right-0 w-50 bg-white shadow-lg rounded-lg z-50">
+                <a href="#home" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Home</a>
+                <a href="#about" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">About Us</a>
+                <a href="#howitworks" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">How It Works</a>
                 <div className="mt-4 px-4">
                   {!isSignedIn ? (
                     <SignInButton mode="modal">
-                      <Button className="w-full flex items-center justify-center border px-4 py-2 rounded-lg text-sm">
-                        <FiHeart className="mr-2" size={20} />
-                        Volunteer as a Listener
-                      </Button>
+                        <Button className={`flex items-center border border-black px-4 py-2 mb-5 rounded-lg text-sm sm:text-base transition`}>
+                            <FiHeart className="mr-2" size={20} />
+                            Volunteer as a Listener
+                        </Button>
                     </SignInButton>
                   ) : (
                     <div className="flex items-center relative px-5 py-2">
@@ -227,7 +227,7 @@ function Navigation() {
           </div>
         </div>
       </nav>
-
+        
     );
 }
 

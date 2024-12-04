@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid"; // Ensure you import uuidv4
 import { FiMessageSquare, FiUserCheck } from "react-icons/fi";
 import Image from "next/legacy/image";
+import WhatsAppButton from "./Whatsapp";
 
 // Define a type for the conditions used in findMatch
 type Condition = { field: string; value: string | number };
@@ -169,20 +170,20 @@ function Hero() {
   };
 
   return (
-    <section className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20 mt-16 sm:mt-32 md:mt-8 mx-4 md:mx-8 lg:mx-10 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
+    <section id="home" className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20 mt-16  md:mt-8 mx-4 md:mx-8 lg:mx-10 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
     {/* Background Video */}
     <video className="absolute top-0 left-0 w-full h-full object-cover opacity-20" src="/hero.mp4" autoPlay loop muted playsInline />
   
     {/* Content */}
     <div className="relative z-10 max-w-full md:max-w-lg space-y-4 md:space-y-6 text-center md:text-left">
-      <h1 className="text-4xl sm:text-5xl sm:pt-10 lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
+      <h1 className="pt-20 text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
         The BuddyHelp Platform
       </h1>
       <p className="text-base sm:text-lg opacity-90">
         Offering emotional support and mental well-being through accessible and anonymous chats.
       </p>
   
-      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mt-6 md:mt-10 justify-center md:justify-start">
+      <div className="pb-20 flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mt-6 md:mt-10 justify-center md:justify-start">
         <Button
           onClick={handleChatClick}
           className="flex items-center bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 hover:shadow-lg px-6 py-3 sm:py-4 rounded-lg text-white transition-transform transform hover:scale-105 text-sm sm:text-base"
@@ -253,7 +254,9 @@ function Hero() {
           className="rounded-lg shadow-2xl transform transition-transform hover:scale-105 max-w-full h-auto"
         />
       </div>
+      <WhatsAppButton />
     </section>
+    
   );
 }
 
